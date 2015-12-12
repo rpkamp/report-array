@@ -33,6 +33,17 @@ class ReportArray
         $this->storage->set($args, $current_value + $add);
     }
 
+    public function sub()
+    {
+        $args = func_get_args();
+        if (count($args) <= 1) {
+            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#sub');
+        }
+
+        $value = array_pop($args);
+        call_user_func_array([$this, 'add'], array_merge($args, [$value * -1]));
+    }
+
     public function mul()
     {
         $args = func_get_args();
@@ -43,6 +54,20 @@ class ReportArray
         $mul = array_pop($args);
         $current_value = $this->storage->get($args);
         $this->storage->set($args, $current_value * $mul); 
+    }
+
+    public function div()
+    {
+        $args = func_get_args();
+        if (count($args) <= 1) {
+            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#div');
+        }
+
+        $value = array_pop($args);
+        if ($value == 0) {
+            throw new \InvalidArgumentException('Cannot divide by zero.');
+        }
+        call_user_func_array([$this, 'mul'], array_merge($args, [1 / $value]));
     }
 
     public function get()

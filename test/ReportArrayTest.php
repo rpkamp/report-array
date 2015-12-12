@@ -70,6 +70,44 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
+    public function testInvalidSub()
+    {
+        $arr = new ReportArray();
+        $arr->sub(1);
+    }
+
+    public function testIllegalSub()
+    {
+        $arr = new ReportArray();
+        $arr->set('foo', 'bar', 1);
+
+        $this->setExpectedException('InvalidArgumentException', 'foo is not a scalar value');
+        $arr->sub('foo', 1);
+    }
+
+    public function testSub()
+    {
+        $arr = new ReportArray();
+
+        $arr->sub('foo', 1);
+        $this->assertEquals(['foo' => -1], $arr->get());
+
+        $arr->sub('foo', 1);
+        $this->assertEquals(['foo' => -2], $arr->get());
+    }
+
+    public function testSubNested()
+    {
+        $arr = new ReportArray();
+
+        $arr->set('foo', 'bar', 'baz', 2);
+        $arr->sub('foo', 'bar', 'baz', 1);
+        $this->assertEquals(['foo' => ['bar' => ['baz' => 1]]], $arr->get());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testInvalidMul()
     {
         $arr = new ReportArray();
@@ -101,5 +139,49 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
         $arr->set('bar', 'baz', 'ban', 2);
         $arr->mul('bar', 'baz', 'ban', 2);
         $this->assertEquals(['bar' => ['baz' => ['ban' => 4]]], $arr->get());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidDiv()
+    {
+        $arr = new ReportArray();
+        $arr->div(1);
+    }
+
+    public function testDivideByZero()
+    {
+        $arr = new ReportArray();
+
+        $this->setExpectedException('InvalidArgumentException', 'Cannot divide by zero');
+        $arr->div('foo', 0);
+    }
+
+    public function testIllegalDiv()
+    {
+        $arr = new ReportArray();
+        $arr->set('foo', 'bar', 1);
+
+        $this->setExpectedException('InvalidArgumentException', 'foo is not a scalar value');
+        $arr->div('foo', 2);
+    }
+
+    public function testDiv()
+    {
+        $arr = new ReportArray();
+
+        $arr->set('foo', 2);
+        $arr->div('foo', 2);
+        $this->assertEquals(['foo' => 1], $arr->get());
+    }
+
+    public function testDivNested()
+    {
+        $arr = new ReportArray();
+
+        $arr->set('bar', 'baz', 'ban', 2);
+        $arr->div('bar', 'baz', 'ban', 2);
+        $this->assertEquals(['bar' => ['baz' => ['ban' => 1]]], $arr->get());
     }
 }
