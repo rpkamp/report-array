@@ -54,4 +54,4 @@ If at any point you want the array shown above just call `$report->get()`.
 That's it. No more isset, just tell the class to add a value and it will assume a value of 0 for any key that was not yet set.
 If you want a different value than 0 as default value, pass it to the `rpkamp\ReportArray\Storage` class constructor as an argument.
 
-In addition to the `add` method, there is also `sub` for substraction, `mul` for multiplication, `div` for division, `pow` for powers and `sqrt` for roots.
+In addition to the `add` method, there is also `sub` for substraction, `mul` for multiplication, `div` for division, `pow` for powers and `root` for roots.

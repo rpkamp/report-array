@@ -77,7 +77,7 @@ class ReportArray
     {
         $args = func_get_args();
         if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#mul');
+            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#pow');
         }
 
         $power = array_pop($args);
@@ -85,11 +85,11 @@ class ReportArray
         $this->storage->set($args, pow($current_value,  $power)); 
     }
 
-    public function sqrt()
+    public function root()
     {
         $args = func_get_args();
         if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#div');
+            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#root');
         }
 
         $value = array_pop($args);

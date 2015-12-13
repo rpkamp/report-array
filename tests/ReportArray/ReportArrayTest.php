@@ -177,36 +177,36 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidSqrt()
+    public function testInvalidRoot()
     {
         $arr = $this->getNewReport();
-        $arr->sqrt(1);
+        $arr->root(1);
     }
 
-    public function testZeroSqrt()
+    public function testZeroRoot()
     {
         $arr = $this->getNewReport();
 
         $arr->set('foo', 9);
         $this->setExpectedException('InvalidArgumentException', '0th root does not exist');
-        $arr->sqrt('foo', 0);
+        $arr->root('foo', 0);
     }
 
-    public function testSqrt()
+    public function testRoot()
     {
         $arr = $this->getNewReport();
 
         $arr->set('foo', 9);
-        $arr->sqrt('foo', 2);
+        $arr->root('foo', 2);
         $this->assertEquals(['foo' => 3], $arr->get());
     }
 
-    public function testSqrtNested()
+    public function testRootNested()
     {
         $arr = $this->getNewReport();
 
         $arr->set('bar', 'baz', 'ban', 9);
-        $arr->sqrt('bar', 'baz', 'ban', 2);
+        $arr->root('bar', 'baz', 'ban', 2);
         $this->assertEquals(['bar' => ['baz' => ['ban' => 3]]], $arr->get());
     }
 
