@@ -14,37 +14,38 @@ bar     | DE      | 2
 
 and want to transform it to an array like
 
-```
-[
-  'foo' => [
-      'NL' => 5,
-      'US' => 10,
-  ],
-  'bar' => [
-    'UK' => 3,
-    'DE' => 2,
-  ]
-]
+```php
+$report = [
+    'foo' => [
+        'NL' => 5,
+        'US' => 10,
+    ],
+    'bar' => [
+      'UK' => 3,
+      'DE' => 2,
+    ]
+];
 ```
 
-you often see code that goes a something like this
+you often see code that goes along the lines of
 
-    $report = [];
-    foreach ($rows as $row) {
-      if (!isset($report[$row['product']][$row['country']])) {
-        $report[$row['product']][$row['country'] = 0;
-      }
-      $report[$row['product']][$row['country']] += $row['count'];
+```
+$report = [];
+foreach ($rows as $row) {
+    if (!isset($report[$row['product']][$row['country']])) {
+        $report[$row['product']][$row['country']] = 0;
     }
+    $report[$row['product']][$row['country']] += $row['count'];
+}
+```
 
 The `isset` part takes up 3 lines total and is quite hard to read. This is where `ReportArray` comes in. Instead of the above you can do
 
-```
+```php
 $storage = new rpkamp\ReportArray\Storage();
 $report = new rpkamp\ReportArray\ReportArray($storage);
-foreach ($rows as $row)
-{
-  $report->add($row['product'], $row['country'], $row['count']);
+foreach ($rows as $row) {
+    $report->add($row['product'], $row['country'], $row['count']);
 }
 ```
 
