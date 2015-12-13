@@ -2,7 +2,9 @@
 
 namespace rpkamp\ReportArray;
 
-class Storage
+use rpkamp\ReportArray\Interfaces\Storage as StorageInterface;
+
+class Storage implements StorageInterface
 {
     private $data;
 
@@ -18,11 +20,11 @@ class Storage
         return $this->data;
     }
 
-    public function set($args, $value)
+    public function set($index, $value)
     {
-        $last = array_pop($args);
+        $last = array_pop($index);
         $arr = &$this->data;
-        foreach($args as $key) {
+        foreach($index as $key) {
             if (isset($arr[$key])) {
                 $arr[$key] = [];
             }
@@ -31,11 +33,11 @@ class Storage
         $arr[$last] = $value;
     }
 
-    public function get($args)
+    public function get($index)
     {
-        $last = array_pop($args);
+        $last = array_pop($index);
         $arr = &$this->data;
-        foreach($args as $key) {
+        foreach($index as $key) {
             if (array_key_exists($key, $arr)) {
                 $arr = &$arr[$key];
                 continue;
@@ -44,7 +46,7 @@ class Storage
         }
         if (isset($arr[$last])) {
             if (!is_scalar($arr[$last])) {
-                throw new \InvalidArgumentException(implode('.', $args).'.'.$last.' is not a scalar value');
+                throw new \InvalidArgumentException(implode('.', $index).'.'.$last.' is not a scalar value');
             }
             return $arr[$last];
         }

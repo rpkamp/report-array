@@ -2,11 +2,14 @@
 
 namespace rpkamp\ReportArray;
 
+use rpkamp\ReportArray\Interfaces\Storage as StorageInterface;
+
 class ReportArray
 {
+    /** @var StorageInterface $storage */
     private $storage;
 
-    public function __construct($storage) {
+    public function __construct(StorageInterface $storage) {
         $this->storage = $storage;
     }
 
@@ -101,4 +104,3 @@ class ReportArray
         return $this->storage->getData();
     }
 }
-
