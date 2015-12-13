@@ -1,6 +1,6 @@
 <?php
 
-namespace ReportArray;
+namespace rpkamp\ReportArray;
 
 class ReportArrayTest extends \PHPUnit_Framework_TestCase
 {
