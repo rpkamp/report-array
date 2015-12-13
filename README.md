@@ -29,7 +29,7 @@ $report = [
 
 you often see code that goes along the lines of
 
-```
+```php
 $report = [];
 foreach ($rows as $row) {
     if (!isset($report[$row['product']][$row['country']])) {
