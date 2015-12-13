@@ -1,8 +1,6 @@
 <?php
 
-namespace rpkamp\ReportArray\test;
-
-use rpkamp\ReportArray\ReportArray;
+namespace ReportArray;
 
 class ReportArrayTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,13 +9,13 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidSet()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
         $arr->set(1);
     }
 
     public function testSet()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->set('foo', 8);
         $this->assertEquals(['foo' => 8], $arr->get());
@@ -34,22 +32,13 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidAdd()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
         $arr->add(1);
-    }
-
-    public function testIllegalAdd()
-    {
-        $arr = new ReportArray();
-        $arr->set('foo', 'bar', 1);
-
-        $this->setExpectedException('InvalidArgumentException', 'foo is not a scalar value');
-        $arr->add('foo', 1);
     }
 
     public function testAdd()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->add('foo', 1);
         $this->assertEquals(['foo' => 1], $arr->get());
@@ -60,7 +49,7 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testAddNested()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->set('foo', 'bar', 'baz', 2);
         $arr->add('foo', 'bar', 'baz', 2);
@@ -72,22 +61,13 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidSub()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
         $arr->sub(1);
-    }
-
-    public function testIllegalSub()
-    {
-        $arr = new ReportArray();
-        $arr->set('foo', 'bar', 1);
-
-        $this->setExpectedException('InvalidArgumentException', 'foo is not a scalar value');
-        $arr->sub('foo', 1);
     }
 
     public function testSub()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->sub('foo', 1);
         $this->assertEquals(['foo' => -1], $arr->get());
@@ -98,7 +78,7 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testSubNested()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->set('foo', 'bar', 'baz', 2);
         $arr->sub('foo', 'bar', 'baz', 1);
@@ -110,22 +90,13 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidMul()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
         $arr->mul(1);
-    }
-
-    public function testIllegalMul()
-    {
-        $arr = new ReportArray();
-        $arr->set('foo', 'bar', 1);
-
-        $this->setExpectedException('InvalidArgumentException', 'foo is not a scalar value');
-        $arr->mul('foo', 2);
     }
 
     public function testMul()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->set('foo', 2);
         $arr->mul('foo', 2);
@@ -134,7 +105,7 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testMulNested()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->set('bar', 'baz', 'ban', 2);
         $arr->mul('bar', 'baz', 'ban', 2);
@@ -146,30 +117,21 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidDiv()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
         $arr->div(1);
     }
 
     public function testDivideByZero()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $this->setExpectedException('InvalidArgumentException', 'Cannot divide by zero');
         $arr->div('foo', 0);
     }
 
-    public function testIllegalDiv()
-    {
-        $arr = new ReportArray();
-        $arr->set('foo', 'bar', 1);
-
-        $this->setExpectedException('InvalidArgumentException', 'foo is not a scalar value');
-        $arr->div('foo', 2);
-    }
-
     public function testDiv()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->set('foo', 2);
         $arr->div('foo', 2);
@@ -178,10 +140,79 @@ class ReportArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testDivNested()
     {
-        $arr = new ReportArray();
+        $arr = $this->getNewReport();
 
         $arr->set('bar', 'baz', 'ban', 2);
         $arr->div('bar', 'baz', 'ban', 2);
         $this->assertEquals(['bar' => ['baz' => ['ban' => 1]]], $arr->get());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidPow()
+    {
+        $arr = $this->getNewReport();
+        $arr->pow(1);
+    }
+
+    public function testPow()
+    {
+        $arr = $this->getNewReport();
+
+        $arr->set('foo', 2);
+        $arr->pow('foo', 3);
+        $this->assertEquals(['foo' => 8], $arr->get());
+    }
+
+    public function testPowNested()
+    {
+        $arr = $this->getNewReport();
+
+        $arr->set('bar', 'baz', 'ban', 2);
+        $arr->pow('bar', 'baz', 'ban', 3);
+        $this->assertEquals(['bar' => ['baz' => ['ban' => 8]]], $arr->get());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidSqrt()
+    {
+        $arr = $this->getNewReport();
+        $arr->sqrt(1);
+    }
+
+    public function testZeroSqrt()
+    {
+        $arr = $this->getNewReport();
+
+        $arr->set('foo', 9);
+        $this->setExpectedException('InvalidArgumentException', '0th root does not exist');
+        $arr->sqrt('foo', 0);
+    }
+
+    public function testSqrt()
+    {
+        $arr = $this->getNewReport();
+
+        $arr->set('foo', 9);
+        $arr->sqrt('foo', 2);
+        $this->assertEquals(['foo' => 3], $arr->get());
+    }
+
+    public function testSqrtNested()
+    {
+        $arr = $this->getNewReport();
+
+        $arr->set('bar', 'baz', 'ban', 9);
+        $arr->sqrt('bar', 'baz', 'ban', 2);
+        $this->assertEquals(['bar' => ['baz' => ['ban' => 3]]], $arr->get());
+    }
+
+    private function getNewReport()
+    {
+        $storage = new Storage();
+        return new ReportArray($storage);
     }
 }

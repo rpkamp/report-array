@@ -1,6 +1,6 @@
 <?php
 
-namespace rpkamp\ReportArray;
+namespace ReportArray;
 
 class Storage
 {
