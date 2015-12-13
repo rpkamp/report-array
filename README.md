@@ -1,7 +1,7 @@
 # report-array
 Easily create aggregate arrays from flat data
 
-Creating a structured array from flat data that comes from a relation database can be quite a hassle.
+Creating a structured array from flat data that comes from a relation database for example can be quite a hassle.
 
 For example when you have data like
 
@@ -27,7 +27,7 @@ and want to transform it to an array like
 ]
 ```
 
-you often see code that goes a little like this
+you often see code that goes a something like this
 
     $report = [];
     foreach ($rows as $row) {
@@ -37,11 +37,11 @@ you often see code that goes a little like this
       $report[$row['product']][$row['country']] += $row['count'];
     }
 
-The `isset` part takes 3 lines and quite noisy to read. This is where `ReportArray` comes in. Instead of the above you can do
+The `isset` part takes up 3 lines total and is quite hard to read. This is where `ReportArray` comes in. Instead of the above you can do
 
 ```
-$storage = new ReportArray\Storage();
-$report = new ReportArray($storage);
+$storage = new rpkamp\ReportArray\Storage();
+$report = new rpkamp\ReportArray\ReportArray($storage);
 foreach ($rows as $row)
 {
   $report->add($row['product'], $row['country'], $row['count']);
@@ -50,7 +50,7 @@ foreach ($rows as $row)
 
 If at any point you want the array shown above just call `$report->get()`.
 
-That's it. No more isset, just tell the class to add a value and it will assume a value of 0 for any key that was not set yet.
-If you want a different value from 0 as default value, pass it the `ReportArray\Storage` class constructor as an argument.
+That's it. No more isset, just tell the class to add a value and it will assume a value of 0 for any key that was not yet set.
+If you want a different value than 0 as default value, pass it to the `rpkamp\ReportArray\Storage` class constructor as an argument.
 
-In addition to the `add` method, there is also `sub` for substraction, `mul` for multiplication, `pow` for powers and `sqrt` for roots.
+In addition to the `add` method, there is also `sub` for substraction, `mul` for multiplication, `div` for division, `pow` for powers and `sqrt` for roots.
