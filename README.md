@@ -1,9 +1,9 @@
-# report-array
-Easily create aggregate arrays from flat data
+# report-array ![Build Status](https://travis-ci.org/rpkamp/report-array.svg)
+Easily create aggregate arrays from flat data.
 
 Creating a structured array from flat data that comes from a relation database for example can be quite a hassle.
 
-For example when you have data like
+For example when you have data like in the following table:
 
 product | country | count
 --------|---------|------
@@ -12,7 +12,7 @@ foo     | US      | 10
 bar     | UK      | 3
 bar     | DE      | 2
 
-and want to transform it to an array like
+And suppose you want to transform it to an array like the following:
 
 ```php
 $report = [
@@ -27,7 +27,7 @@ $report = [
 ];
 ```
 
-you often see code that goes along the lines of
+What you often end up with is code that looks like this:
 
 ```php
 $report = [];
@@ -39,7 +39,7 @@ foreach ($rows as $row) {
 }
 ```
 
-The `isset` part takes up 3 lines total and is quite hard to read. This is where `ReportArray` comes in. Instead of the above you can do
+The `isset` part takes up 3 lines total and is quite hard to read. This is where `ReportArray` comes in. Instead of the above you can do the following:
 
 ```php
 $storage = new rpkamp\ReportArray\Storage();
