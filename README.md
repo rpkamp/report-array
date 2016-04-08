@@ -1,4 +1,4 @@
-# report-array ![Build Status](https://travis-ci.org/rpkamp/report-array.svg)
+# report-array [![Build Status](https://travis-ci.org/rpkamp/report-array.svg)](https://travis-ci.org/rpkamp/report-array)
 Easily create aggregate arrays from flat data.
 
 Creating a structured array from flat data that comes from a relation database for example can be quite a hassle.
