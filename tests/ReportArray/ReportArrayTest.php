@@ -2,7 +2,9 @@
 
 namespace rpkamp\ReportArray;
 
-class ReportArrayTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class ReportArrayTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \InvalidArgumentException
