@@ -214,7 +214,7 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
 
     private function getNewReport()
     {
-        $storage = new Storage();
+        $storage = new MemoryStorage();
         return new ReportArray($storage);
     }
 }
