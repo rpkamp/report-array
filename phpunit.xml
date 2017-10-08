@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit bootstrap="vendor/autoload.php" colors="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.3/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         >
     <testsuites>
-        <testsuite name="ReportArray Test Suite">
-            <directory>tests/ReportArray/</directory>
+        <testsuite>
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -17,4 +20,3 @@
         <ini name="date.timezone" value="UTC"/>
     </php>
 </phpunit>
-

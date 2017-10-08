@@ -2,15 +2,14 @@
 
 namespace rpkamp\ReportArray;
 
-use PHPUnit_Framework_TestCase;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
-class ReportArrayTest extends PHPUnit_Framework_TestCase
+class ReportArrayTest extends TestCase
 {
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidSet()
     {
+        $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->set(1);
     }
@@ -29,11 +28,9 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(['foo' => 8, 'baz' => 10, 'ban' => ['bar' => 2]], $arr->get());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidAdd()
     {
+        $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->add(1);
     }
@@ -58,11 +55,9 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(['foo' => ['bar' => ['baz' => 4]]], $arr->get());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidSub()
     {
+        $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->sub(1);
     }
@@ -87,11 +82,9 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(['foo' => ['bar' => ['baz' => 1]]], $arr->get());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidMul()
     {
+        $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->mul(1);
     }
@@ -114,11 +107,9 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(['bar' => ['baz' => ['ban' => 4]]], $arr->get());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidDiv()
     {
+        $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->div(1);
     }
@@ -127,7 +118,8 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
     {
         $arr = $this->getNewReport();
 
-        $this->setExpectedException('InvalidArgumentException', 'Cannot divide by zero');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot divide by zero');
         $arr->div('foo', 0);
     }
 
@@ -149,11 +141,9 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(['bar' => ['baz' => ['ban' => 1]]], $arr->get());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidPow()
     {
+        $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->pow(1);
     }
@@ -176,11 +166,9 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(['bar' => ['baz' => ['ban' => 8]]], $arr->get());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidRoot()
     {
+        $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->root(1);
     }
@@ -190,7 +178,8 @@ class ReportArrayTest extends PHPUnit_Framework_TestCase
         $arr = $this->getNewReport();
 
         $arr->set('foo', 9);
-        $this->setExpectedException('InvalidArgumentException', '0th root does not exist');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('0th root does not exist');
         $arr->root('foo', 0);
     }
 

@@ -2,9 +2,10 @@
 
 namespace rpkamp\ReportArray;
 
-use PHPUnit_Framework_TestCase;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
-class MemoryStorageTest extends PHPUnit_Framework_TestCase
+class MemoryStorageTest extends TestCase
 {
     public function testDefaultDefaultValue()
     {
@@ -44,7 +45,8 @@ class MemoryStorageTest extends PHPUnit_Framework_TestCase
         $storage = new MemoryStorage();
         $storage->set(['foo', 'bar'], 1);
 
-        $this->setExpectedException('InvalidArgumentException', 'foo is not a scalar value');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('foo is not a scalar value');
         $storage->get(['foo']);
     }
 }
