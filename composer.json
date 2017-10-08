@@ -26,11 +26,5 @@
     },
     "autoload-dev": {
         "psr-4": {"rpkamp\\ReportArray\\": "tests/ReportArray"}
-    },
-    "scripts": {
-        "test": [
-            "parallel-lint . --exclude vendor",
-            "phpunit -c phpunit.dist.xml"
-        ]
     }
 }
