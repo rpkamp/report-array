@@ -55,3 +55,27 @@ That's it. No more isset, just tell the class to add a value and it will assume 
 If you want a different value than 0 as default value, pass it to the `rpkamp\ReportArray\Storage` class constructor as an argument.
 
 In addition to the `add` method, there is also `sub` for substraction, `mul` for multiplication, `div` for division, `pow` for powers and `root` for roots.
+
+## Installation
+From the command line run:
+
+```
+composer require rpkamp/report-array
+```
+
+## Adding methods
+You can easily add your own method if you need to by providing it to `rpkamp\ReportArray\ReportArray#addMethod`.
+
+For example:
+```
+$storage = new rpkamp\ReportArray\Storage();
+$report = new rpkamp\ReportArray\ReportArray($storage);
+
+$report->addMethod('myCustomMethod', function ($carry, $value) {
+    return 2 * $carry + $value;
+});
+
+$report->set('foo', 2);
+$report->myCustomMethod('foo', 10);
+$report->get(); // returns ['foo' => 14] (2 * 2 + 10)
+```

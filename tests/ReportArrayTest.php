@@ -20,6 +20,33 @@ class ReportArrayTest extends TestCase
     /**
      * @test
      */
+    public function it_should_allow_adding_strategies()
+    {
+        $arr = $this->getNewReport();
+
+        $arr->addMethod('myCustomMethod', function ($carry, $value) {
+            return 2 * $carry + $value;
+        });
+
+        $arr->set('bar', 1);
+        $arr->myCustomMethod('bar', 42);
+        $this->assertEquals(['bar' => 44], $arr->get());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_adding_native_method()
+    {
+        $arr = $this->getNewReport();
+
+        $this->expectException(InvalidArgumentException::class);
+        $arr->addMethod('get', function () {});
+    }
+
+    /**
+     * @test
+     */
     public function it_should_correctly_set_values_in_report()
     {
         $arr = $this->getNewReport();

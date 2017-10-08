@@ -4,6 +4,15 @@ namespace rpkamp\ReportArray;
 
 use rpkamp\ReportArray\Interfaces\Storage as StorageInterface;
 
+/**
+ * @method void set(...$arguments)
+ * @method void add(...$arguments)
+ * @method void sub(...$arguments)
+ * @method void mul(...$arguments)
+ * @method void div(...$arguments)
+ * @method void pow(...$arguments)
+ * @method void root(...$arguments)
+ */
 class ReportArray
 {
     /**
@@ -12,124 +21,75 @@ class ReportArray
     private $storage;
 
     /**
+     * @var callback[]
+     */
+    private $methods;
+
+    /**
      * @param StorageInterface $storage
      */
     public function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;
+
+        $this->addMethod('set', function ($_, $value) {
+            return $value;
+        });
+        $this->addMethod('add', function ($carry, $value) {
+            return $carry + $value;
+        });
+        $this->addMethod('sub', function ($carry, $value) {
+            return $carry - $value;
+        });
+        $this->addMethod('mul', function ($carry, $value) {
+            return $carry * $value;
+        });
+        $this->addMethod('div', function ($carry, $value) {
+            if ($value == 0) {
+                throw new \InvalidArgumentException('Cannot divide by zero.');
+            }
+            return $carry / $value;
+        });
+        $this->addMethod('pow', function ($carry, $value) {
+            return $carry ** $value;
+        });
+        $this->addMethod('root', function ($carry, $value) {
+            if ($value == 0) {
+                throw new \InvalidArgumentException('0th root does not exist');
+            }
+            return $carry ** (1/$value);
+        });
     }
 
-    /**
-     * @return void
-     */
-    public function set()
+    public function addMethod(string $name, callable $strategy): void
     {
-        $args = func_get_args();
-        if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#set');
+        if (method_exists($this, $name)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Method %s is already defined on %s - unable to override using __call',
+                    $name,
+                    get_class($this)
+                )
+            );
         }
-
-        $value = array_pop($args);
-        $this->storage->set($args, $value);
+        $this->methods[$name] = $strategy;
     }
 
-    /**
-     * @return void
-     */
-    public function add()
+    public function __call(string $method, array $arguments): void
     {
-        $args = func_get_args();
-        if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#add');
+        if (!array_key_exists($method, $this->methods)) {
+            throw new \RuntimeException('Call to non-existing method ReportArray#'.$method);
         }
 
-        $add = array_pop($args);
-        $current_value = $this->storage->get($args);
-        $this->storage->set($args, $current_value + $add);
+        if (count($arguments) <= 1) {
+            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#'.$method);
+        }
+
+        $value = array_pop($arguments);
+        $this->storage->set($arguments, $this->methods[$method]($this->storage->get($arguments), $value));
     }
 
-    /**
-     * @return void
-     */
-    public function sub()
-    {
-        $args = func_get_args();
-        if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#sub');
-        }
-
-        $value = array_pop($args);
-        call_user_func_array([$this, 'add'], array_merge($args, [$value * -1]));
-    }
-
-    /**
-     * @return void
-     */
-    public function mul()
-    {
-        $args = func_get_args();
-        if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#mul');
-        }
-
-        $mul = array_pop($args);
-        $current_value = $this->storage->get($args);
-        $this->storage->set($args, $current_value * $mul);
-    }
-
-    /**
-     * @return void
-     */
-    public function div()
-    {
-        $args = func_get_args();
-        if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#div');
-        }
-
-        $value = array_pop($args);
-        if ($value == 0) {
-            throw new \InvalidArgumentException('Cannot divide by zero.');
-        }
-        call_user_func_array([$this, 'mul'], array_merge($args, [1 / $value]));
-    }
-
-    /**
-     * @return void
-     */
-    public function pow()
-    {
-        $args = func_get_args();
-        if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#pow');
-        }
-
-        $power = array_pop($args);
-        $current_value = $this->storage->get($args);
-        $this->storage->set($args, $current_value ** $power);
-    }
-
-    /**
-     * @return void
-     */
-    public function root()
-    {
-        $args = func_get_args();
-        if (count($args) <= 1) {
-            throw new \InvalidArgumentException('Need at least two parameters for ReportArray#root');
-        }
-
-        $value = array_pop($args);
-        if ($value == 0) {
-            throw new \InvalidArgumentException('0th root does not exist');
-        }
-        call_user_func_array([$this, 'pow'], array_merge($args, [1 / $value]));
-    }
-
-    /**
-     * @return array
-     */
-    public function get()
+    public function get(): array
     {
         return $this->storage->getData();
     }
