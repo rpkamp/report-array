@@ -74,7 +74,7 @@ class ReportArray
 
         $mul = array_pop($args);
         $current_value = $this->storage->get($args);
-        $this->storage->set($args, $current_value * $mul); 
+        $this->storage->set($args, $current_value * $mul);
     }
 
     /**

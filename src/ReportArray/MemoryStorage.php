@@ -41,7 +41,7 @@ class MemoryStorage implements StorageInterface
     {
         $last = array_pop($index);
         $arr = &$this->data;
-        foreach($index as $key) {
+        foreach ($index as $key) {
             if (isset($arr[$key])) {
                 $arr[$key] = [];
             }
