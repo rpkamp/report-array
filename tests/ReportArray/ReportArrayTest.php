@@ -7,14 +7,20 @@ use PHPUnit\Framework\TestCase;
 
 class ReportArrayTest extends TestCase
 {
-    public function testInvalidSet()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_setting_value_at_root_level()
     {
         $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->set(1);
     }
 
-    public function testSet()
+    /**
+     * @test
+     */
+    public function it_should_correctly_set_values_in_report()
     {
         $arr = $this->getNewReport();
 
@@ -28,14 +34,20 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => 8, 'baz' => 10, 'ban' => ['bar' => 2]], $arr->get());
     }
 
-    public function testInvalidAdd()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_adding_value_at_root_level()
     {
         $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->add(1);
     }
 
-    public function testAdd()
+    /**
+     * @test
+     */
+    public function it_should_correctly_add_values_to_report()
     {
         $arr = $this->getNewReport();
 
@@ -46,7 +58,10 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => 2], $arr->get());
     }
 
-    public function testAddNested()
+    /**
+     * @test
+     */
+    public function it_should_correctly_add_values_in_nested_report()
     {
         $arr = $this->getNewReport();
 
@@ -55,14 +70,20 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => ['bar' => ['baz' => 4]]], $arr->get());
     }
 
-    public function testInvalidSub()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_subtracting_value_at_root_level()
     {
         $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->sub(1);
     }
 
-    public function testSub()
+    /**
+     * @test
+     */
+    public function it_should_correctly_subtract_values_from_report()
     {
         $arr = $this->getNewReport();
 
@@ -73,7 +94,10 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => -2], $arr->get());
     }
 
-    public function testSubNested()
+    /**
+     * @test
+     */
+    public function it_should_correctly_subtract_values_from_nested_report()
     {
         $arr = $this->getNewReport();
 
@@ -82,14 +106,20 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => ['bar' => ['baz' => 1]]], $arr->get());
     }
 
-    public function testInvalidMul()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_multiplying_value_at_root_level()
     {
         $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->mul(1);
     }
 
-    public function testMul()
+    /**
+     * @test
+     */
+    public function it_should_correctly_multiply_values_in_report()
     {
         $arr = $this->getNewReport();
 
@@ -98,7 +128,10 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => 4], $arr->get());
     }
 
-    public function testMulNested()
+    /**
+     * @test
+     */
+    public function it_should_correctly_multiply_values_in_nested_report()
     {
         $arr = $this->getNewReport();
 
@@ -107,14 +140,20 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['bar' => ['baz' => ['ban' => 4]]], $arr->get());
     }
 
-    public function testInvalidDiv()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_dividing_value_at_root_level()
     {
         $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->div(1);
     }
 
-    public function testDivideByZero()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_dividing_value_by_zero()
     {
         $arr = $this->getNewReport();
 
@@ -123,7 +162,10 @@ class ReportArrayTest extends TestCase
         $arr->div('foo', 0);
     }
 
-    public function testDiv()
+    /**
+     * @test
+     */
+    public function it_should_correctly_divide_values_in_report()
     {
         $arr = $this->getNewReport();
 
@@ -132,7 +174,10 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => 1], $arr->get());
     }
 
-    public function testDivNested()
+    /**
+     * @test
+     */
+    public function it_should_correctly_divide_values_in_nested_report()
     {
         $arr = $this->getNewReport();
 
@@ -141,14 +186,20 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['bar' => ['baz' => ['ban' => 1]]], $arr->get());
     }
 
-    public function testInvalidPow()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_taking_the_power_of_value_at_root_level()
     {
         $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->pow(1);
     }
 
-    public function testPow()
+    /**
+     * @test
+     */
+    public function it_should_correctly_calculate_powers_in_report()
     {
         $arr = $this->getNewReport();
 
@@ -157,7 +208,10 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => 8], $arr->get());
     }
 
-    public function testPowNested()
+    /**
+     * @test
+     */
+    public function it_should_correctly_calculate_powers_in_nested_report()
     {
         $arr = $this->getNewReport();
 
@@ -166,14 +220,20 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['bar' => ['baz' => ['ban' => 8]]], $arr->get());
     }
 
-    public function testInvalidRoot()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_taking_root_of_value_at_root_level()
     {
         $this->expectException(InvalidArgumentException::class);
         $arr = $this->getNewReport();
         $arr->root(1);
     }
 
-    public function testZeroRoot()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_taking_zero_root_of_value()
     {
         $arr = $this->getNewReport();
 
@@ -183,7 +243,10 @@ class ReportArrayTest extends TestCase
         $arr->root('foo', 0);
     }
 
-    public function testRoot()
+    /**
+     * @test
+     */
+    public function it_should_correctly_calculate_root_in_report()
     {
         $arr = $this->getNewReport();
 
@@ -192,7 +255,10 @@ class ReportArrayTest extends TestCase
         $this->assertEquals(['foo' => 3], $arr->get());
     }
 
-    public function testRootNested()
+    /**
+     * @test
+     */
+    public function it_should_correctly_calculate_root_in_nested_report()
     {
         $arr = $this->getNewReport();
 

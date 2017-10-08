@@ -7,21 +7,30 @@ use PHPUnit\Framework\TestCase;
 
 class MemoryStorageTest extends TestCase
 {
-    public function testDefaultDefaultValue()
+    /**
+     * @test
+     */
+    public function it_should_return_zero_when_no_custom_default_value_provided()
     {
         $storage = new MemoryStorage();
         $this->assertEquals(0, $storage->get(['foo']));
         $this->assertEquals(0, $storage->get(['foo', 'bar']));
     }
 
-    public function testAlternaviveDefaultValue()
+    /**
+     * @test
+     */
+    public function it_should_return_custom_default_value_when_provided()
     {
         $storage = new MemoryStorage(5);
         $this->assertEquals(5, $storage->get(['foo']));
         $this->assertEquals(5, $storage->get(['foo', 'bar']));
     }
 
-    public function testSet()
+    /**
+     * @test
+     */
+    public function it_should_store_data_constructed_by_set_calls()
     {
         $storage = new MemoryStorage();
         $storage->set(['foo'], 1);
@@ -30,7 +39,10 @@ class MemoryStorageTest extends TestCase
         $this->assertEquals(['foo' => 1, 'bar' => ['baz' => 2]], $storage->getData());
     }
 
-    public function testGet()
+    /**
+     * @test
+     */
+    public function it_should_return_values_from_stored_data()
     {
         $storage = new MemoryStorage();
         $storage->set(['foo'], 1);
@@ -40,7 +52,10 @@ class MemoryStorageTest extends TestCase
         $this->assertEquals(2, $storage->get(['bar', 'baz']));
     }
 
-    public function testNotScalar()
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_requesting_non_scalar_value()
     {
         $storage = new MemoryStorage();
         $storage->set(['foo', 'bar'], 1);

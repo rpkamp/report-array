@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab4baa36f8219e07476c39d78c49cd04",
+    "content-hash": "ecb47544980a2e8519980e20aa49897e",
     "packages": [],
     "packages-dev": [
         {
@@ -963,6 +963,51 @@
                 "xunit"
             ],
             "time": "2017-08-03T14:08:16+00:00"
+        },
+        {
+            "name": "rpkamp/fancy-testdox-printer",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rpkamp/fancy-testdox-printer.git",
+                "reference": "91a5e8e7595d4304d0363419b8c4a1bb401dad40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rpkamp/fancy-testdox-printer/zipball/91a5e8e7595d4304d0363419b8c4a1bb401dad40",
+                "reference": "91a5e8e7595d4304d0363419b8c4a1bb401dad40",
+                "shasum": ""
+            },
+            "require": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "rpkamp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Remon van de Kamp",
+                    "email": "rpkamp@gmail.com",
+                    "homepage": "https://www.rpkamp.com/"
+                }
+            ],
+            "description": "A fancy testdox printer for PHPUnit",
+            "keywords": [
+                "phpunit",
+                "printer",
+                "testdox"
+            ],
+            "time": "2017-10-07T20:14:30+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
