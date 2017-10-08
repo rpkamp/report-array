@@ -106,7 +106,7 @@ class ReportArray
 
         $power = array_pop($args);
         $current_value = $this->storage->get($args);
-        $this->storage->set($args, pow($current_value,  $power)); 
+        $this->storage->set($args, $current_value ** $power);
     }
 
     /**
