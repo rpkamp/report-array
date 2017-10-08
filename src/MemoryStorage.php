@@ -2,9 +2,10 @@
 
 namespace rpkamp\ReportArray;
 
-use rpkamp\ReportArray\Interfaces\Storage as StorageInterface;
+use InvalidArgumentException;
+use rpkamp\ReportArray\Interfaces\Storage;
 
-class MemoryStorage implements StorageInterface
+class MemoryStorage implements Storage
 {
     /**
      * @var array
@@ -14,21 +15,18 @@ class MemoryStorage implements StorageInterface
     /**
      * @var mixed
      */
-    private $default_value;
+    private $defaultValue;
 
     /**
-     * @param mixed $default_value
+     * @param mixed $defaultValue
      */
-    public function __construct($default_value = 0)
+    public function __construct($defaultValue = 0)
     {
         $this->data = [];
-        $this->default_value = $default_value;
+        $this->defaultValue = $defaultValue;
     }
 
-    /**
-     * @return array
-     */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
@@ -37,7 +35,7 @@ class MemoryStorage implements StorageInterface
      * @param array $index
      * @param mixed $value
      */
-    public function set($index, $value)
+    public function set($index, $value): void
     {
         $last = array_pop($index);
         $arr = &$this->data;
@@ -53,6 +51,7 @@ class MemoryStorage implements StorageInterface
     /**
      * @param array $index
      * @return mixed
+     * @throws \InvalidArgumentException
      */
     public function get($index)
     {
@@ -63,14 +62,14 @@ class MemoryStorage implements StorageInterface
                 $arr = &$arr[$key];
                 continue;
             }
-            return $this->default_value;
+            return $this->defaultValue;
         }
         if (isset($arr[$last])) {
             if (!is_scalar($arr[$last])) {
-                throw new \InvalidArgumentException(implode('.', $index).'.'.$last.' is not a scalar value');
+                throw new InvalidArgumentException(implode('.', $index).'.'.$last.' is not a scalar value');
             }
             return $arr[$last];
         }
-        return $this->default_value;
+        return $this->defaultValue;
     }
 }
