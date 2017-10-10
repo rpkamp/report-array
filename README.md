@@ -1,4 +1,5 @@
-# report-array [![Build Status](https://travis-ci.org/rpkamp/report-array.svg)](https://travis-ci.org/rpkamp/report-array)
+# report-array [![Build Status](https://travis-ci.org/rpkamp/report-array.svg)](https://travis-ci.org/rpkamp/report-array) [![codecov](https://codecov.io/gh/rpkamp/report-array/branch/master/graph/badge.svg)](https://codecov.io/gh/rpkamp/report-array)
+
 Easily create aggregate arrays from flat data.
 
 Creating a structured array from flat data that comes from a relational database for example can be quite a hassle.
