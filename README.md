@@ -71,7 +71,7 @@ composer require rpkamp/report-array
 You can easily add your own method if you need to by providing it to `rpkamp\ReportArray\ReportArray#addMethod`.
 
 For example:
-```
+```php
 $storage = new rpkamp\ReportArray\Storage();
 $report = new rpkamp\ReportArray\ReportArray($storage);
 
