@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "09552661f175a0f4e368efdf99a14e12",
+    "content-hash": "903be2c69f85f29093503e4bcd0ad44d",
     "packages": [],
     "packages-dev": [
         {
@@ -856,16 +856,16 @@
         },
         {
             "name": "rpkamp/fancy-testdox-printer",
-            "version": "0.1",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rpkamp/fancy-testdox-printer.git",
-                "reference": "91a5e8e7595d4304d0363419b8c4a1bb401dad40"
+                "reference": "89d49736921ddcf73785e39db4fed6219a813d91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rpkamp/fancy-testdox-printer/zipball/91a5e8e7595d4304d0363419b8c4a1bb401dad40",
-                "reference": "91a5e8e7595d4304d0363419b8c4a1bb401dad40",
+                "url": "https://api.github.com/repos/rpkamp/fancy-testdox-printer/zipball/89d49736921ddcf73785e39db4fed6219a813d91",
+                "reference": "89d49736921ddcf73785e39db4fed6219a813d91",
                 "shasum": ""
             },
             "require": {
@@ -897,7 +897,7 @@
                 "printer",
                 "testdox"
             ],
-            "time": "2017-10-07T20:14:30+00:00"
+            "time": "2017-10-12T20:20:32+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
