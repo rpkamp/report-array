@@ -8,9 +8,9 @@ phpcs:
 
 phpunit:
 ifeq ($(TRAVIS),true)
-	vendor/bin/phpunit --coverage-clover=coverage.xml
+	vendor/bin/phpunit --testdox --coverage-clover=coverage.xml
 else
-	vendor/bin/phpunit
+	vendor/bin/phpunit --testdox
 endif
 
 .PHONY: test lint phpcs phpunit
