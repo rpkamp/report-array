@@ -13,13 +13,12 @@
         }
     ],
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "phpunit/phpunit": "^7.0",
+        "squizlabs/php_codesniffer": "^3.3",
+        "jakub-onderka/php-parallel-lint": "^1.0"
     },
     "require-dev": {
-        "jakub-onderka/php-parallel-lint": "0.*",
-        "phpunit/phpunit": "^6.0",
-        "rpkamp/fancy-testdox-printer": "^0.1.1",
-        "squizlabs/php_codesniffer": "^3.1"
     },
     "autoload": {
         "psr-4": {"rpkamp\\ReportArray\\": "src/"}
