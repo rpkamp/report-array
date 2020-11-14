@@ -1,4 +1,4 @@
-# report-array [![CircleCI](https://circleci.com/gh/rpkamp/report-array/tree/master.svg?style=svg)](https://circleci.com/gh/rpkamp/report-array/tree/master) [![codecov](https://codecov.io/gh/rpkamp/report-array/branch/master/graph/badge.svg)](https://codecov.io/gh/rpkamp/report-array)
+# report-array 
 
 Easily create aggregate arrays from flat data.
 
