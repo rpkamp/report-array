@@ -1,7 +1,11 @@
 {
     "name": "rpkamp/report-array",
     "description": "Easily create aggregate arrays from flat data",
-    "keywords": ["array", "reporting", "aggregate"],
+    "keywords": [
+        "array",
+        "reporting",
+        "aggregate"
+    ],
     "homepage": "http://github.com/rpkamp/report-array",
     "type": "library",
     "license": "MIT",
@@ -13,17 +17,21 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "phpunit/phpunit": "^7.0",
-        "squizlabs/php_codesniffer": "^3.3",
-        "jakub-onderka/php-parallel-lint": "^1.0"
+        "php": "^7.2"
     },
     "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "^1.2",
+        "phpunit/phpunit": "^8.0",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
-        "psr-4": {"rpkamp\\ReportArray\\": "src/"}
+        "psr-4": {
+            "rpkamp\\ReportArray\\": "src/"
+        }
     },
     "autoload-dev": {
-        "psr-4": {"rpkamp\\ReportArray\\": "tests/"}
+        "psr-4": {
+            "rpkamp\\ReportArray\\": "tests/"
+        }
     }
 }
